@@ -1,0 +1,32 @@
+{
+  "name": "mt4-zmq-bridge",
+  "version": "1.0.0",
+  "description": "Node.js and MetaTrader 4 communication bridge with ZeroMQ.",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/bonnevoyager/node-mt4-zmq-bridge"
+  },
+  "keywords": [
+    "mt4",
+    "metatrader4",
+    "zmq",
+    "zeromq"
+  ],
+  "author": "Krzysztof Gutkowski",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/bonnevoyager/node-mt4-zmq-bridge/issues"
+  },
+  "homepage": "https://github.com/bonnevoyager/node-mt4-zmq-bridge",
+  "dependencies": {
+    "zeromq": "^4.6.0"
+  },
+  "devDependencies": {
+    "chai": "^4.1.2",
+    "mocha": "^5.2.0"
+  },
+  "scripts": {
+    "test": "node ./node_modules/mocha/bin/mocha ./index.spec.js"
+  }
+}
