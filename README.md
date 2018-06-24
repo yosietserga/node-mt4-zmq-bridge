@@ -134,6 +134,10 @@ IMPORTANT: Some tests will open market order. Work with tests only on demo accou
 npm run test
 ```
 
+## Changelog
+
+[CHANGELOG.md](https://github.com/BonneVoyager/node-mt4-zmq-bridge/blob/master/CHANGELOG.md)
+
 ## License
 
 [MIT](LICENSE)

@@ -46,6 +46,15 @@ describe('MetaTrader4', () => {
 
   describe('communication with MT4', () => {
 
+    it('should ping MT4 client', (done) => {
+      zmqBridge.request(mt4zmqBridge.REQUEST_PING, (err, res) => {
+        expect(err).to.be.null
+        expect(Array.isArray(res)).to.be.true
+        res.length.should.equal(1)
+        done()
+      })
+    })
+
     it('should return current rates', (done) => {
       zmqBridge.request(mt4zmqBridge.REQUEST_RATES, "USDJPY", (err, res) => {
         expect(err).to.be.null

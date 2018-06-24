@@ -3,6 +3,7 @@ const url = require('url')
 const zmq = require('zeromq')
 
 // Identificators for internal request operations.
+const REQUEST_PING = 1
 const REQUEST_TRADE_OPEN = 11
 const REQUEST_TRADE_MODIFY = 12
 const REQUEST_TRADE_DELETE = 13
@@ -247,7 +248,7 @@ module.exports.connect = (reqUrl, pullUrl) => {
       if (reqDelayedConnects === 2) {
         socket.removeListener('connect', connectCallback)
         socket.removeListener('connect_delay', performCheck)
-        log.warn(`METATRADER4 cannot connect with ${url}.`)
+        console.warn(`METATRADER4 cannot connect with ${url}.`)
       }
     }
 
@@ -302,6 +303,7 @@ module.exports.connect = (reqUrl, pullUrl) => {
   return bridgeObject
 }
 
+module.exports.REQUEST_PING = REQUEST_PING
 module.exports.REQUEST_TRADE_OPEN = REQUEST_TRADE_OPEN
 module.exports.REQUEST_TRADE_MODIFY = REQUEST_TRADE_MODIFY
 module.exports.REQUEST_TRADE_DELETE = REQUEST_TRADE_DELETE
