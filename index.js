@@ -33,125 +33,113 @@ const OP_SELLSTOP = 5
 // See: https://book.mql4.com/appendix/errors
 const ERROR_CODES = {
   // Error codes returned from a trade server or client terminal:
-  0: [ "No error returned.", "ERR_NO_ERROR" ],
-  1: [ "No error returned", "ERR_NO_RESULT" ],
-  2: [ "Common error.", "ERR_COMMON_ERROR" ],
-  3: [ "Invalid trade parameters.", "ERR_INVALID_TRADE_PARAMETERS" ],
-  4: [ "Trade server is busy.", "ERR_SERVER_BUSY" ],
-  5: [ "Old version of the client terminal.", "ERR_OLD_VERSION" ],
-  6: [ "No connection with trade server.", "ERR_NO_CONNECTION" ],
-  7: [ "Not enough rights.", "ERR_NOT_ENOUGH_RIGHTS" ],
-  8: [ "Too frequent requests.", "ERR_TOO_FREQUENT_REQUESTS" ],
-  9: [ "Malfunctional trade operation.", "ERR_MALFUNCTIONAL_TRADE" ],
-  64: [ "Account disabled.", "ERR_ACCOUNT_DISABLED" ],
-  65: [ "Invalid account.", "ERR_INVALID_ACCOUNT" ],
-  128: [ "Trade timeout.", "ERR_TRADE_TIMEOUT" ],
-  129: [ "Invalid price.", "ERR_INVALID_PRICE" ],
-  130: [ "Invalid stops.", "ERR_INVALID_STOPS" ],
-  131: [ "Invalid trade volume.", "ERR_INVALID_TRADE_VOLUME" ],
-  132: [ "Market is closed.", "ERR_MARKET_CLOSED" ],
-  133: [ "Trade is disabled.", "ERR_TRADE_DISABLED" ],
-  134: [ "Not enough money.", "ERR_NOT_ENOUGH_MONEY" ],
-  135: [ "Price changed.", "ERR_PRICE_CHANGED" ],
-  136: [ "Off quotes.", "ERR_OFF_QUOTES" ],
-  137: [ "Broker is busy.", "ERR_BROKER_BUSY" ],
-  138: [ "Requote.", "ERR_REQUOTE" ],
-  139: [ "Order is locked.", "ERR_ORDER_LOCKED" ],
-  140: [ "Long positions only allowed.", "ERR_LONG_POSITIONS_ONLY_ALLOWED" ],
-  141: [ "Too many requests.", "ERR_TOO_MANY_REQUESTS" ],
-  145: [ "Modification denied because an order is too close to market.", "ERR_TRADE_MODIFY_DENIED" ],
-  146: [ "Trade context is busy.", "ERR_TRADE_CONTEXT_BUSY" ],
-  147: [ "Expirations are denied by broker.", "ERR_TRADE_EXPIRATION_DENIED" ],
-  148: [ "The amount of opened and pending orders has reached the limit set by a broker.", "ERR_TRADE_TOO_MANY_ORDERS" ],
+  0: [ 'No error returned.', 'ERR_NO_ERROR' ],
+  1: [ 'No error returned', 'ERR_NO_RESULT' ],
+  2: [ 'Common error.', 'ERR_COMMON_ERROR' ],
+  3: [ 'Invalid trade parameters.', 'ERR_INVALID_TRADE_PARAMETERS' ],
+  4: [ 'Trade server is busy.', 'ERR_SERVER_BUSY' ],
+  5: [ 'Old version of the client terminal.', 'ERR_OLD_VERSION' ],
+  6: [ 'No connection with trade server.', 'ERR_NO_CONNECTION' ],
+  7: [ 'Not enough rights.', 'ERR_NOT_ENOUGH_RIGHTS' ],
+  8: [ 'Too frequent requests.', 'ERR_TOO_FREQUENT_REQUESTS' ],
+  9: [ 'Malfunctional trade operation.', 'ERR_MALFUNCTIONAL_TRADE' ],
+  64: [ 'Account disabled.', 'ERR_ACCOUNT_DISABLED' ],
+  65: [ 'Invalid account.', 'ERR_INVALID_ACCOUNT' ],
+  128: [ 'Trade timeout.', 'ERR_TRADE_TIMEOUT' ],
+  129: [ 'Invalid price.', 'ERR_INVALID_PRICE' ],
+  130: [ 'Invalid stops.', 'ERR_INVALID_STOPS' ],
+  131: [ 'Invalid trade volume.', 'ERR_INVALID_TRADE_VOLUME' ],
+  132: [ 'Market is closed.', 'ERR_MARKET_CLOSED' ],
+  133: [ 'Trade is disabled.', 'ERR_TRADE_DISABLED' ],
+  134: [ 'Not enough money.', 'ERR_NOT_ENOUGH_MONEY' ],
+  135: [ 'Price changed.', 'ERR_PRICE_CHANGED' ],
+  136: [ 'Off quotes.', 'ERR_OFF_QUOTES' ],
+  137: [ 'Broker is busy.', 'ERR_BROKER_BUSY' ],
+  138: [ 'Requote.', 'ERR_REQUOTE' ],
+  139: [ 'Order is locked.', 'ERR_ORDER_LOCKED' ],
+  140: [ 'Long positions only allowed.', 'ERR_LONG_POSITIONS_ONLY_ALLOWED' ],
+  141: [ 'Too many requests.', 'ERR_TOO_MANY_REQUESTS' ],
+  145: [ 'Modification denied because an order is too close to market.', 'ERR_TRADE_MODIFY_DENIED' ],
+  146: [ 'Trade context is busy.', 'ERR_TRADE_CONTEXT_BUSY' ],
+  147: [ 'Expirations are denied by broker.', 'ERR_TRADE_EXPIRATION_DENIED' ],
+  148: [ 'The amount of opened and pending orders has reached the limit set by a broker.', 'ERR_TRADE_TOO_MANY_ORDERS' ],
   // MQL4 run time error codes:
-  4000: [ "No error.", "ERR_NO_MQLERROR" ],
-  4001: [ "Wrong function pointer.", "ERR_WRONG_FUNCTION_POINTER" ],
-  4002: [ "Array index is out of range.", "ERR_ARRAY_INDEX_OUT_OF_RANGE" ],
-  4003: [ "No memory for function call stack.", "ERR_NO_MEMORY_FOR_FUNCTION_CALL_STACK" ],
-  4004: [ "Recursive stack overflow.", "ERR_RECURSIVE_STACK_OVERFLOW" ],
-  4005: [ "Not enough stack for parameter.", "ERR_NOT_ENOUGH_STACK_FOR_PARAMETER" ],
-  4006: [ "No memory for parameter string.", "ERR_NO_MEMORY_FOR_PARAMETER_STRING" ],
-  4007: [ "No memory for temp string.", "ERR_NO_MEMORY_FOR_TEMP_STRING" ],
-  4008: [ "Not initialized string.", "ERR_NOT_INITIALIZED_STRING" ],
-  4009: [ "Not initialized string in an array.", "ERR_NOT_INITIALIZED_ARRAYSTRING" ],
-  4010: [ "No memory for an array string.", "ERR_NO_MEMORY_FOR_ARRAYSTRING" ],
-  4011: [ "Too long string.", "ERR_TOO_LONG_STRING" ],
-  4012: [ "Remainder from zero divide.", "ERR_REMAINDER_FROM_ZERO_DIVIDE" ],
-  4013: [ "Zero divide.", "ERR_ZERO_DIVIDE" ],
-  4014: [ "Unknown command.", "ERR_UNKNOWN_COMMAND" ],
-  4015: [ "Wrong jump.", "ERR_WRONG_JUMP" ],
-  4016: [ "Not initialized array.", "ERR_NOT_INITIALIZED_ARRAY" ],
-  4017: [ "DLL calls are not allowed.", "ERR_DLL_CALLS_NOT_ALLOWED" ],
-  4018: [ "Cannot load library.", "ERR_CANNOT_LOAD_LIBRARY" ],
-  4019: [ "Cannot call function.", "ERR_CANNOT_CALL_FUNCTION" ],
-  4020: [ "EA function calls are not allowed.", "ERR_EXTERNAL_EXPERT_CALLS_NOT_ALLOWED" ],
-  4021: [ "Not enough memory for a string returned from a function.", "ERR_NOT_ENOUGH_MEMORY_FOR_RETURNED_STRING" ],
-  4022: [ "System is busy.", "ERR_SYSTEM_BUSY" ],
-  4050: [ "Invalid function parameters count.", "ERR_INVALID_FUNCTION_PARAMETERS_COUNT" ],
-  4051: [ "Invalid function parameter value.", "ERR_INVALID_FUNCTION_PARAMETER_VALUE" ],
-  4052: [ "String function internal error.", "ERR_STRING_FUNCTION_INTERNAL_ERROR" ],
-  4053: [ "Some array error.", "ERR_SOME_ARRAY_ERROR" ],
-  4054: [ "Incorrect series array using.", "ERR_INCORRECT_SERIES_ARRAY_USING" ],
-  4055: [ "Custom indicator error.", "ERR_CUSTOM_INDICATOR_ERROR" ],
-  4056: [ "Arrays are incompatible.", "ERR_INCOMPATIBLE_ARRAYS" ],
-  4057: [ "Global variables processing error.", "ERR_GLOBAL_VARIABLES_PROCESSING_ERROR" ],
-  4058: [ "Global variable not found.", "ERR_GLOBAL_VARIABLE_NOT_FOUND" ],
-  4059: [ "Function is not allowed in testing mode.", "ERR_FUNCTION_NOT_ALLOWED_IN_TESTING_MODE" ],
-  4060: [ "Function is not confirmed.", "ERR_FUNCTION_NOT_CONFIRMED" ],
-  4061: [ "Mail sending error.", "ERR_SEND_MAIL_ERROR" ],
-  4062: [ "String parameter expected.", "ERR_STRING_PARAMETER_EXPECTED" ],
-  4063: [ "Integer parameter expected.", "ERR_INTEGER_PARAMETER_EXPECTED" ],
-  4064: [ "Double parameter expected.", "ERR_DOUBLE_PARAMETER_EXPECTED" ],
-  4065: [ "Array as parameter expected.", "ERR_ARRAY_AS_PARAMETER_EXPECTED" ],
-  4066: [ "Requested history data in updating state.", "ERR_HISTORY_WILL_UPDATED" ],
-  4067: [ "Some error in trade operation execution.", "ERR_TRADE_ERROR" ],
-  4099: [ "End of a file.", "ERR_END_OF_FILE" ],
-  4100: [ "Some file error.", "ERR_SOME_FILE_ERROR" ],
-  4101: [ "Wrong file name.", "ERR_WRONG_FILE_NAME" ],
-  4102: [ "Too many opened files.", "ERR_TOO_MANY_OPENED_FILES" ],
-  4103: [ "Cannot open file.", "ERR_CANNOT_OPEN_FILE" ],
-  4104: [ "Incompatible access to a file.", "ERR_INCOMPATIBLE_ACCESS_TO_FILE" ],
-  4105: [ "No order selected.", "ERR_NO_ORDER_SELECTED" ],
-  4106: [ "Unknown symbol.", "ERR_UNKNOWN_SYMBOL" ],
-  4107: [ "Invalid price.", "ERR_INVALID_PRICE_PARAM" ],
-  4108: [ "Invalid ticket.", "ERR_INVALID_TICKET" ],
-  4109: [ "Trade is not allowed.", "ERR_TRADE_NOT_ALLOWED" ],
-  4110: [ "Longs are not allowed.", "ERR_LONGS_NOT_ALLOWED" ],
-  4111: [ "Shorts are not allowed.", "ERR_SHORTS_NOT_ALLOWED" ],
-  4200: [ "Object already exists.", "ERR_OBJECT_ALREADY_EXISTS" ],
-  4201: [ "Unknown object property.", "ERR_UNKNOWN_OBJECT_PROPERTY" ],
-  4202: [ "Object does not exist.", "ERR_OBJECT_DOES_NOT_EXIST" ],
-  4203: [ "Unknown object type.", "ERR_UNKNOWN_OBJECT_TYPE" ],
-  4204: [ "No object name.", "ERR_NO_OBJECT_NAME" ],
-  4205: [ "Object coordinates error.", "ERR_OBJECT_COORDINATES_ERROR" ],
-  4206: [ "No specified subwindow.", "ERR_NO_SPECIFIED_SUBWINDOW" ],
-  4207: [ "Some error in object operation.", "ERR_SOME_OBJECT_ERROR" ]
+  4000: [ 'No error.', 'ERR_NO_MQLERROR' ],
+  4001: [ 'Wrong function pointer.', 'ERR_WRONG_FUNCTION_POINTER' ],
+  4002: [ 'Array index is out of range.', 'ERR_ARRAY_INDEX_OUT_OF_RANGE' ],
+  4003: [ 'No memory for function call stack.', 'ERR_NO_MEMORY_FOR_FUNCTION_CALL_STACK' ],
+  4004: [ 'Recursive stack overflow.', 'ERR_RECURSIVE_STACK_OVERFLOW' ],
+  4005: [ 'Not enough stack for parameter.', 'ERR_NOT_ENOUGH_STACK_FOR_PARAMETER' ],
+  4006: [ 'No memory for parameter string.', 'ERR_NO_MEMORY_FOR_PARAMETER_STRING' ],
+  4007: [ 'No memory for temp string.', 'ERR_NO_MEMORY_FOR_TEMP_STRING' ],
+  4008: [ 'Not initialized string.', 'ERR_NOT_INITIALIZED_STRING' ],
+  4009: [ 'Not initialized string in an array.', 'ERR_NOT_INITIALIZED_ARRAYSTRING' ],
+  4010: [ 'No memory for an array string.', 'ERR_NO_MEMORY_FOR_ARRAYSTRING' ],
+  4011: [ 'Too long string.', 'ERR_TOO_LONG_STRING' ],
+  4012: [ 'Remainder from zero divide.', 'ERR_REMAINDER_FROM_ZERO_DIVIDE' ],
+  4013: [ 'Zero divide.', 'ERR_ZERO_DIVIDE' ],
+  4014: [ 'Unknown command.', 'ERR_UNKNOWN_COMMAND' ],
+  4015: [ 'Wrong jump.', 'ERR_WRONG_JUMP' ],
+  4016: [ 'Not initialized array.', 'ERR_NOT_INITIALIZED_ARRAY' ],
+  4017: [ 'DLL calls are not allowed.', 'ERR_DLL_CALLS_NOT_ALLOWED' ],
+  4018: [ 'Cannot load library.', 'ERR_CANNOT_LOAD_LIBRARY' ],
+  4019: [ 'Cannot call function.', 'ERR_CANNOT_CALL_FUNCTION' ],
+  4020: [ 'EA function calls are not allowed.', 'ERR_EXTERNAL_EXPERT_CALLS_NOT_ALLOWED' ],
+  4021: [ 'Not enough memory for a string returned from a function.', 'ERR_NOT_ENOUGH_MEMORY_FOR_RETURNED_STRING' ],
+  4022: [ 'System is busy.', 'ERR_SYSTEM_BUSY' ],
+  4050: [ 'Invalid function parameters count.', 'ERR_INVALID_FUNCTION_PARAMETERS_COUNT' ],
+  4051: [ 'Invalid function parameter value.', 'ERR_INVALID_FUNCTION_PARAMETER_VALUE' ],
+  4052: [ 'String function internal error.', 'ERR_STRING_FUNCTION_INTERNAL_ERROR' ],
+  4053: [ 'Some array error.', 'ERR_SOME_ARRAY_ERROR' ],
+  4054: [ 'Incorrect series array using.', 'ERR_INCORRECT_SERIES_ARRAY_USING' ],
+  4055: [ 'Custom indicator error.', 'ERR_CUSTOM_INDICATOR_ERROR' ],
+  4056: [ 'Arrays are incompatible.', 'ERR_INCOMPATIBLE_ARRAYS' ],
+  4057: [ 'Global variables processing error.', 'ERR_GLOBAL_VARIABLES_PROCESSING_ERROR' ],
+  4058: [ 'Global variable not found.', 'ERR_GLOBAL_VARIABLE_NOT_FOUND' ],
+  4059: [ 'Function is not allowed in testing mode.', 'ERR_FUNCTION_NOT_ALLOWED_IN_TESTING_MODE' ],
+  4060: [ 'Function is not confirmed.', 'ERR_FUNCTION_NOT_CONFIRMED' ],
+  4061: [ 'Mail sending error.', 'ERR_SEND_MAIL_ERROR' ],
+  4062: [ 'String parameter expected.', 'ERR_STRING_PARAMETER_EXPECTED' ],
+  4063: [ 'Integer parameter expected.', 'ERR_INTEGER_PARAMETER_EXPECTED' ],
+  4064: [ 'Double parameter expected.', 'ERR_DOUBLE_PARAMETER_EXPECTED' ],
+  4065: [ 'Array as parameter expected.', 'ERR_ARRAY_AS_PARAMETER_EXPECTED' ],
+  4066: [ 'Requested history data in updating state.', 'ERR_HISTORY_WILL_UPDATED' ],
+  4067: [ 'Some error in trade operation execution.', 'ERR_TRADE_ERROR' ],
+  4099: [ 'End of a file.', 'ERR_END_OF_FILE' ],
+  4100: [ 'Some file error.', 'ERR_SOME_FILE_ERROR' ],
+  4101: [ 'Wrong file name.', 'ERR_WRONG_FILE_NAME' ],
+  4102: [ 'Too many opened files.', 'ERR_TOO_MANY_OPENED_FILES' ],
+  4103: [ 'Cannot open file.', 'ERR_CANNOT_OPEN_FILE' ],
+  4104: [ 'Incompatible access to a file.', 'ERR_INCOMPATIBLE_ACCESS_TO_FILE' ],
+  4105: [ 'No order selected.', 'ERR_NO_ORDER_SELECTED' ],
+  4106: [ 'Unknown symbol.', 'ERR_UNKNOWN_SYMBOL' ],
+  4107: [ 'Invalid price.', 'ERR_INVALID_PRICE_PARAM' ],
+  4108: [ 'Invalid ticket.', 'ERR_INVALID_TICKET' ],
+  4109: [ 'Trade is not allowed.', 'ERR_TRADE_NOT_ALLOWED' ],
+  4110: [ 'Longs are not allowed.', 'ERR_LONGS_NOT_ALLOWED' ],
+  4111: [ 'Shorts are not allowed.', 'ERR_SHORTS_NOT_ALLOWED' ],
+  4200: [ 'Object already exists.', 'ERR_OBJECT_ALREADY_EXISTS' ],
+  4201: [ 'Unknown object property.', 'ERR_UNKNOWN_OBJECT_PROPERTY' ],
+  4202: [ 'Object does not exist.', 'ERR_OBJECT_DOES_NOT_EXIST' ],
+  4203: [ 'Unknown object type.', 'ERR_UNKNOWN_OBJECT_TYPE' ],
+  4204: [ 'No object name.', 'ERR_NO_OBJECT_NAME' ],
+  4205: [ 'Object coordinates error.', 'ERR_OBJECT_COORDINATES_ERROR' ],
+  4206: [ 'No specified subwindow.', 'ERR_NO_SPECIFIED_SUBWINDOW' ],
+  4207: [ 'Some error in object operation.', 'ERR_SOME_OBJECT_ERROR' ]
 }
 
 module.exports.connect = (reqUrl, pullUrl) => {
   if (!reqUrl || !url.parse(reqUrl).hostname) {
-    throw new Error("reqUrl invalid.")
+    throw new Error('reqUrl invalid.')
   } else if (!pullUrl || !url.parse(pullUrl).hostname) {
-    throw new Error("pullUrl invalid.")
+    throw new Error('pullUrl invalid.')
   }
 
   let requestId = 1                                // used to identify requests
-  const requestQueueValue = 5                      // helps to maintain zmq queue
-  const requestTimeoutValue = 15000                // time after which request receives a timeout
-  const requestEvents = new events.EventEmitter()  // used to handle data from responses
+  let requestTimeoutValue = 15000                  // time after which request receives a timeout
 
-  // Check whether connections to the servers are established.
-  function requestCheckConnections(fn) {
-    if (!bridgeObject.reqConnected) {
-      fn(new Error("ZMQ REQ connection is closed."))
-      return false
-    } else if (!bridgeObject.pullConnected) {
-      fn(new Error("ZMQ PULL connection is closed."))
-      return false
-    } else {
-      return true
-    }
-  }
+  const requestQueueValue = 5                      // helps to maintain zmq queue
+  const requestEvents = new events.EventEmitter()  // used to handle data from responses
 
   // Read and return response data for callback or Promise.
   function requestCallback(timeout, callback, resolve, reject, err, res) {
@@ -166,7 +154,7 @@ module.exports.connect = (reqUrl, pullUrl) => {
   // A request timeout callback.
   function requestTimeoutCallback({ reqId, onceCallback, fn }) {
     requestEvents.removeListener(reqId, onceCallback)
-    fn(new Error("ZMQ Request timeout."))
+    fn(new Error('ZMQ Request timeout.'))
   }
   
   /**
@@ -179,34 +167,32 @@ module.exports.connect = (reqUrl, pullUrl) => {
     const reqId = requestId++
     let timeoutObject, timeout, callback, onceCallback
 
-    if (typeof args[args.length - 1] === "function") {            // Callback Variant
+    if (typeof args[args.length - 1] === 'function') {            // Callback Variant
       callback = args.pop()
-      if (requestCheckConnections(callback))                      // check status of req/pull connections
       setTimeout(() => {                                          // maintains queueing
         timeoutObject = { reqId, onceCallback, fn: callback }     // to use onceCallback reference at later point
         timeout = setTimeout(requestTimeoutCallback.bind(null, timeoutObject), requestTimeoutValue)
         onceCallback = requestCallback.bind(null, timeout, callback, null, null)
         timeoutObject.onceCallback = onceCallback                 // add reference in case of timeout
         requestEvents.once(reqId, onceCallback)                   // wait for response from pull server
-        reqSocket.send(`${reqId}|${args.join("|")}`)              // send request message
+        reqSocket.send(`${reqId}|${args.join('|')}`)              // queue request message
       }, requestQueueValue)
     } else {                                                      // Promise Variant
       return new Promise((resolve, reject) => {
-        if (requestCheckConnections(reject))                      // check status of req/pull connections
         setTimeout(() => {                                        // maintains queueing
           timeoutObject = { reqId, onceCallback, fn: reject }     // to use onceCallback reference at later point
           timeout = setTimeout(requestTimeoutCallback.bind(null, timeoutObject), requestTimeoutValue)
           onceCallback = requestCallback.bind(null, timeout, null, resolve, reject)
           timeoutObject.onceCallback = onceCallback               // add reference in case of timeout
           requestEvents.once(reqId, onceCallback)                 // wait for response from pull server
-          reqSocket.send(`${reqId}|${args.join("|")}`)            // send request message
+          reqSocket.send(`${reqId}|${args.join('|')}`)            // queue request message
         }, requestQueueValue)
       })
     }
   }
 
   /**
-   * Message with items separated by pipe | sign.
+   * Message with items separated by pipe "|" sign.
    * First item is always the id, second is the status, then message data follows.
    * In case of error, there is only one message data item containing error code.
    * 
@@ -220,7 +206,7 @@ module.exports.connect = (reqUrl, pullUrl) => {
     let err, msg
     if (status === RESPONSE_OK) {
       err = null
-      msg = split.length === 2 && split[1] === "" ? true : split
+      msg = split.length === 2 && split[1] === '' ? true : split
       if (msg !== true) {
         msg.shift()
       }
@@ -259,6 +245,12 @@ module.exports.connect = (reqUrl, pullUrl) => {
     socket.once('connect', connectCallback)
     socket.on('connect_delay', performCheck)
   }
+
+  function setRequestTimeoutValue(value) {
+    if (typeof value === 'number') {
+      requestTimeoutValue = value
+    }
+  }
   
   // Create socket objects
   const reqSocket = zmq.socket('req')
@@ -276,10 +268,10 @@ module.exports.connect = (reqUrl, pullUrl) => {
   })
 
   // Listen for connect and disconnect events 
-  reqSocket.on('connect', () => bridgeObject.reqConnected = true)
-  pullSocket.on('connect', () => bridgeObject.pullConnected = true)
-  reqSocket.on('disconnect', () => bridgeObject.reqConnected = false)
-  pullSocket.on('disconnect', () => bridgeObject.pullConnected = false)
+  reqSocket.on('connect', () => bridgeObject.reqConnected = !reqSocket.closed)
+  pullSocket.on('connect', () => bridgeObject.pullConnected = !pullSocket.closed)
+  reqSocket.on('disconnect', () => bridgeObject.reqConnected = reqSocket.closed)
+  pullSocket.on('disconnect', () => bridgeObject.pullConnected = pullSocket.closed)
 
   // Wait for potential connection problems
   checkConnection(reqSocket, reqUrl)
@@ -297,7 +289,8 @@ module.exports.connect = (reqUrl, pullUrl) => {
     reqConnected: false,
     pullConnected: false,
     reqSocket: reqSocket,
-    pullSocket: pullSocket
+    pullSocket: pullSocket,
+    setRequestTimeoutValue: setRequestTimeoutValue
   }
 
   return bridgeObject

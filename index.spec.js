@@ -4,6 +4,8 @@ const expect = chai.expect
 
 chai.should()
 
+const SPEC_PAIR = 'USDJPY'
+
 describe('MetaTrader4', () => {
 
   let zmqBridge
@@ -14,6 +16,8 @@ describe('MetaTrader4', () => {
   before((done) => {
     function checkDone() {
       if (zmqBridge.reqConnected && zmqBridge.pullConnected) {
+        zmqBridge.reqSocket.off('connect', checkDone)
+        zmqBridge.pullSocket.off('connect', checkDone)
         done()
       }
     }
@@ -29,7 +33,7 @@ describe('MetaTrader4', () => {
   })
 
   function openTestOrder(volume, property, price, stoploss, takeprofit, testOrderTickets) {
-    return zmqBridge.request(mt4zmqBridge.REQUEST_TRADE_OPEN, "USDJPY", property, volume, price, 0, stoploss, takeprofit, "test", 0, mt4zmqBridge.UNIT_CONTRACTS)
+    return zmqBridge.request(mt4zmqBridge.REQUEST_TRADE_OPEN, SPEC_PAIR, property, volume, price, 0, stoploss, takeprofit, "test", 0, mt4zmqBridge.UNIT_CONTRACTS)
       .then((res) => {
         expect(Array.isArray(res)).to.be.true
         res.length.should.equal(1)
@@ -56,7 +60,7 @@ describe('MetaTrader4', () => {
     })
 
     it('should return current rates', (done) => {
-      zmqBridge.request(mt4zmqBridge.REQUEST_RATES, "USDJPY", (err, res) => {
+      zmqBridge.request(mt4zmqBridge.REQUEST_RATES, SPEC_PAIR, (err, res) => {
         expect(err).to.be.null
         expect(Array.isArray(res)).to.be.true
         res.length.should.equal(3)
@@ -65,7 +69,7 @@ describe('MetaTrader4', () => {
         usdjpyTicker.bid.should.not.equal(0)
         usdjpyTicker.ask.should.not.equal(0)
 
-        zmqBridge.request(mt4zmqBridge.REQUEST_RATES, "USDJPY")
+        zmqBridge.request(mt4zmqBridge.REQUEST_RATES, SPEC_PAIR)
           .then((res) => {
             done()
           })
@@ -86,14 +90,14 @@ describe('MetaTrader4', () => {
     })
 
     it('should not open test pending order', (done) => {
-      zmqBridge.request(mt4zmqBridge.REQUEST_TRADE_OPEN, "USDJPY", mt4zmqBridge.OP_BUY, 122.000001, "%-10", 0, 0, 0, "test", 0, mt4zmqBridge.UNIT_CONTRACTS, (err, res) => {
+      zmqBridge.request(mt4zmqBridge.REQUEST_TRADE_OPEN, SPEC_PAIR, mt4zmqBridge.OP_BUY, 122.000001, "%-10", 0, 0, 0, "test", 0, mt4zmqBridge.UNIT_CONTRACTS, (err, res) => {
         expect(err).not.to.be.null
         done()
       })
     })
 
     it('should open test pending order', (done) => {
-      zmqBridge.request(mt4zmqBridge.REQUEST_TRADE_OPEN, "USDJPY", mt4zmqBridge.OP_BUYLIMIT, 0.01, "%-15", 0, "-20", "+20", "test", 0, mt4zmqBridge.UNIT_CONTRACTS, (err, res) => {
+      zmqBridge.request(mt4zmqBridge.REQUEST_TRADE_OPEN, SPEC_PAIR, mt4zmqBridge.OP_BUYLIMIT, 0.01, "%-15", 0, "-20", "+20", "test", 0, mt4zmqBridge.UNIT_CONTRACTS, (err, res) => {
         expect(err).to.be.null
         expect(Array.isArray(res)).to.be.true
         res.length.should.equal(1)
@@ -156,7 +160,7 @@ describe('MetaTrader4', () => {
             expect(orders.find(order => order[0] == testOrderTickets[1])).not.to.be.undefined
             expect(orders.find(order => order[0] == testOrderTickets[2])).not.to.be.undefined
 
-            zmqBridge.request(mt4zmqBridge.REQUEST_DELETE_ALL_PENDING_ORDERS, "USDJPY").then(() => {
+            zmqBridge.request(mt4zmqBridge.REQUEST_DELETE_ALL_PENDING_ORDERS, SPEC_PAIR).then(() => {
               zmqBridge.request(mt4zmqBridge.REQUEST_ORDERS)
                 .then((res) => {
                   if (Array.isArray(res)) {
@@ -191,12 +195,12 @@ describe('MetaTrader4', () => {
     }).timeout(4000)
 
     it('should close all market orders', (done) => {
-      zmqBridge.request(mt4zmqBridge.REQUEST_CLOSE_ALL_MARKET_ORDERS, "USDJPY")
+      zmqBridge.request(mt4zmqBridge.REQUEST_CLOSE_ALL_MARKET_ORDERS, SPEC_PAIR)
         .then(zmqBridge.request(mt4zmqBridge.REQUEST_ORDERS)
           .then((res) => {
             if (Array.isArray(res)) {
               const orders = res.map(item => item.split(","))
-              expect(orders.find(item => item[4] === "USDJPY")).to.be.undefined
+              expect(orders.find(item => item[4] === SPEC_PAIR)).to.be.undefined
             } else {
               expect(Array.isArray(res)).to.be.false
               expect(res).to.be.true
