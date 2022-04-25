@@ -4,31 +4,16 @@ const zmq = require('zeromq')
 
 // Identificators for internal request operations.
 const REQUEST_PING = 1
-const REQUEST_TRADE_OPEN = 11
-const REQUEST_TRADE_MODIFY = 12
-const REQUEST_TRADE_DELETE = 13
-const REQUEST_DELETE_ALL_PENDING_ORDERS = 21
-const REQUEST_CLOSE_MARKET_ORDER = 22
-const REQUEST_CLOSE_ALL_MARKET_ORDERS = 23
 const REQUEST_RATES = 31
 const REQUEST_ACCOUNT = 41
 const REQUEST_ORDERS = 51
+const REQUEST_HISTORY = 52
+const REQUEST_DEPOSITS = 53
+const REQUEST_CREDITS = 54
 
 // Identificators for internal response operations.
 const RESPONSE_OK = 0
 const RESPONSE_FAILED = 1
-
-// Identificators for internal unit types.
-const UNIT_CONTRACTS = 0
-const UNIT_CURRENCY = 1
-
-// See: https://docs.mql4.com/constants/tradingconstants/orderproperties
-const OP_BUY = 0
-const OP_SELL = 1
-const OP_BUYLIMIT = 2
-const OP_SELLLIMIT = 3
-const OP_BUYSTOP = 4
-const OP_SELLSTOP = 5
 
 // See: https://book.mql4.com/appendix/errors
 const ERROR_CODES = {
@@ -288,6 +273,7 @@ module.exports.connect = (reqUrl, pullUrl) => {
     isWaitingForResponse: isWaitingForResponse,
     reqConnected: false,
     pullConnected: false,
+    parseMessage: parseMessage,
     reqSocket: reqSocket,
     pullSocket: pullSocket,
     setRequestTimeoutValue: setRequestTimeoutValue
@@ -297,27 +283,14 @@ module.exports.connect = (reqUrl, pullUrl) => {
 }
 
 module.exports.REQUEST_PING = REQUEST_PING
-module.exports.REQUEST_TRADE_OPEN = REQUEST_TRADE_OPEN
-module.exports.REQUEST_TRADE_MODIFY = REQUEST_TRADE_MODIFY
-module.exports.REQUEST_TRADE_DELETE = REQUEST_TRADE_DELETE
-module.exports.REQUEST_DELETE_ALL_PENDING_ORDERS = REQUEST_DELETE_ALL_PENDING_ORDERS
-module.exports.REQUEST_CLOSE_MARKET_ORDER = REQUEST_CLOSE_MARKET_ORDER
-module.exports.REQUEST_CLOSE_ALL_MARKET_ORDERS = REQUEST_CLOSE_ALL_MARKET_ORDERS
 module.exports.REQUEST_RATES = REQUEST_RATES
 module.exports.REQUEST_ACCOUNT = REQUEST_ACCOUNT
 module.exports.REQUEST_ORDERS = REQUEST_ORDERS
+module.exports.REQUEST_HISTORY = REQUEST_HISTORY
+module.exports.REQUEST_DEPOSITS = REQUEST_DEPOSITS
+module.exports.REQUEST_CREDITS = REQUEST_CREDITS
 
 module.exports.RESPONSE_OK = RESPONSE_OK
 module.exports.RESPONSE_FAILED = RESPONSE_FAILED
-
-module.exports.UNIT_CONTRACTS = UNIT_CONTRACTS
-module.exports.UNIT_CURRENCY = UNIT_CURRENCY
-
-module.exports.OP_BUY = OP_BUY
-module.exports.OP_SELL = OP_SELL
-module.exports.OP_BUYLIMIT = OP_BUYLIMIT
-module.exports.OP_SELLLIMIT = OP_SELLLIMIT
-module.exports.OP_BUYSTOP = OP_BUYSTOP
-module.exports.OP_SELLSTOP = OP_SELLSTOP
 
 module.exports.ERROR_CODES = ERROR_CODES
