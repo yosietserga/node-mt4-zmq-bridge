@@ -68,6 +68,34 @@ zmqBridge.request(mt4zmqBridge.REQUEST_RATES, 'USDJPY')
   .catch(err => {})
 ```
 
+[Buy limit](https://github.com/bonnevoyager/MetaTrader4-Bridge#trade-operations) order for 'USDJPY'.
+
+```
+zmqBridge.request(
+  mt4zmqBridge.REQUEST_TRADE_OPEN,  // request type
+  'USDJPY',                         // market symbol
+  mt4zmqBridge.OP_BUYLIMIT,         // order type
+  1.2,                              // volume
+  105.23,                           // price
+  0,                                // slippage
+  100.10,                           // stop loss
+  110.76,                           // take profit
+  'evening trade',                  // comment
+  0,                                // magic number
+  mt4zmqBridge.UNIT_CONTRACTS       // unit type
+, (err, res) => {
+  console.log(res); // [ '140734412' ]
+});
+```
+
+[Cancel](https://github.com/bonnevoyager/MetaTrader4-Bridge#api) pending order.
+
+```
+zmqBridge.request(mt4zmqBridge.REQUEST_TRADE_DELETE, 140734412).then(res => {
+  console.log(res); // [ '140734412' ]
+});
+```
+
 More examples can be found in index.spec.js.
 
 #### zmqBridge.onReqMessage
